@@ -13,19 +13,24 @@ let size = 30;
 
 ref.btnCreate.addEventListener("click", () => {
   let amount = parseInt(ref.input.value);
-  createBoxes(amount);
+  const markup = createBoxes(amount);
+  appendMarkup(markup);
 });
 function createBoxes(amount) {
+  const arrDivs = [];
   for (let i = 0; i < amount; i++) {
     let divBox = document.createElement("div");
     divBox.style.width = size + "px";
     divBox.style.height = size + "px";
     divBox.style.backgroundColor = getRandomHexColor();
-    ref.div.append(divBox);
+    arrDivs.push(divBox);
     size += 10;
   }
+  return arrDivs;
 }
-
+function appendMarkup(markup) {
+  ref.div.append(...markup);
+}
 ref.btnDestroy.addEventListener("click", () => {
   destroyBoxes();
 });
